@@ -1,0 +1,15 @@
+[
+    {
+        "day1": {
+            "did_brush": true,
+            "day_number": "day1",
+            "added_points": 1,
+            "removed_points": 0,
+            "current_streak": 1,
+            "data_and_time": "27-12-2002",
+            "pause_left" : 5,
+            "current_badge":"",
+            "tag_name":""
+        } 
+    }
+]
