@@ -50,7 +50,7 @@ import BrushedResults from "./components/BrushedResults";
 // import GameTesting from "./components/GameTesting";
 import MatchingGameEasyVegetable from "./components/MatchingGameCom/MatchingGameEasyVegetable";
 import MatchingGameEasyFruits from "./components/MatchingGameCom/MatchingGameEasyFruits";
-import MadnessEasy from "./components/MadnessGameCom/MadnessEasy";
+import NumberPatternHard from "./components/NumberPatternCom/NumberPatternHard";
 const App = () => {
   return (
     <Provider store={store}>
@@ -74,7 +74,7 @@ const App = () => {
               </Route>
               <Route path="/testing-game" element={<MatchingGameEasyFruits/>} />
               <Route path="/vegetables" element={<MatchingGameEasyVegetable/>}/>
-              <Route path="/professions" element={<MadnessEasy/>} />
+              <Route path="/professions" element={<NumberPatternHard/>} />
               <Route path="/game-rules" element={<GameRules/>}/>
               <Route path="games-landing" element={<BrushedResults/>}/>
               {/* <Route path="/games" element={<Games/>} /> */}
