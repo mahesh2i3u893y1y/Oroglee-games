@@ -70,7 +70,7 @@ const SpinWheel = () => {
           radiusLineColor="#ddd"
           radiusLineWidth={2}
           textColors={["#333"]}
-          backgroundColors={["#FFDDC1", "#FFABAB"]}
+          backgroundColors={["#FFDDC1", "#FFABAB", "#32a852", "#32a892", "#8532a8", "#a832a4", "#a8327b", "#a83248", "#a84432", "#3267a8"]}
         />
       </div>
       {!mustSpin && questions.length > 0 && (
