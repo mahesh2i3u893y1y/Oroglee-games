@@ -10,6 +10,7 @@ const OddOneOutCopy = ({questions}) => {
   const [score, setScore] = useState(0);
   const [isAnswered, setIsAnswered] = useState(false);
   const [showEffect, setShowEffect] = useState(false);
+  const questionLength = questions.length
 
   const confettiConfig = {
     angle: "90",
@@ -85,7 +86,7 @@ const OddOneOutCopy = ({questions}) => {
       ) : (
         <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center">
           <h1 className="text-3xl font-bold mb-4">Game Over!</h1>
-          <p className="text-lg font-semibold">Your Score: {score} / 10</p>
+          <p className="text-lg font-semibold">Your Score: {score} /{questionLength} </p>
           <button
             onClick={() => {
               setCurrentQuestion(0);

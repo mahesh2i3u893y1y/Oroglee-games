@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { updateLevel } from "../Utilities/gamesDataSlice";
 import { addNewDay, enableNextDay } from "../Utilities/dayDataSlice";
 import { useNavigate } from "react-router";
 
@@ -9,6 +10,8 @@ const BrushingGame = () => {
 
   const { brushedToday, nextDayAvailable } = useSelector((state) => state.dayData);
 
+  const level = useSelector((store) => store.games.level)
+
   const [skipDays, setSkipDays] = useState(0);
 
   const handleBrushed = () => {
@@ -17,6 +20,7 @@ const BrushingGame = () => {
       navigate("/games-landing");
     }
   };
+
 
   const handleSkipDays = () => {
     const daysToSkip = parseInt(skipDays, 10);
@@ -34,8 +38,34 @@ const BrushingGame = () => {
     }
   };
 
+  const handleLevelChange = (level) => {
+    console.log("Dispatching level change to:", level);
+    dispatch(updateLevel(level))
+  }
+
   return (
-    <div className="flex flex-col gap-4 items-center">
+    <div className="flex flex-col gap-4 items-center ">
+      <p>{level}</p>
+      <div className="flex justify-center items-center gap-3">
+        <button
+          className="bg-green-500 px-4 py-2 rounded-md text-white font-semibold"
+          onClick={() => handleLevelChange("easy")}
+        >
+          Level-1
+        </button>
+        <button
+          className="bg-yellow-400 px-4 py-2 rounded-md text-white font-semibold"
+          onClick={() => handleLevelChange("medium")}
+        >
+          Level-2
+        </button>
+        <button
+          className="bg-red-500 px-4 py-2 rounded-md text-white font-semibold"
+          onClick={() => handleLevelChange("hard")}
+        >
+          Level-3
+        </button>
+      </div>
       <div className="flex gap-3">
         <button
           className="bg-green-500 text-white py-2 px-6 rounded-md hover:bg-green-600 transition disabled:opacity-50"

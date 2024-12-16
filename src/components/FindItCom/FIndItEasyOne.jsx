@@ -2,7 +2,7 @@ import { FindItWords } from "../constants"
 import FindItCopy from "./FindItCopy"
 
 
-const FIndItEasyOne = () => {
+const FindItEasyOne = () => {
   return (
     <div>
         <FindItCopy words={FindItWords} />
@@ -10,4 +10,4 @@ const FIndItEasyOne = () => {
   )
 }
 
-export default FIndItEasyOne
+export default FindItEasyOne

@@ -10,7 +10,7 @@ const initialGrid = [
   [18, "", 9, "", 18, "", ""],
 ];
 
-const ClassroomMadness = () => {
+const MadnessHard = () => {
   const [grid, setGrid] = useState(initialGrid);
 
   const isValid = () => {
@@ -116,4 +116,4 @@ const ClassroomMadness = () => {
   );
 };
 
-export default ClassroomMadness;
+export default MadnessHard;
