@@ -96,9 +96,11 @@ import GameRules from "./components/GameRules";
 import { Provider } from "react-redux";
 import store from "./Utilities/gameStore"
 import BrushedResults from "./components/BrushedResults";
+import AddGroup from "./components/AddGroup";
 // import GameTesting from "./components/GameTesting";
-
+import AddUsers from "./components/AddUsers";
 import SpinMathMedium from "./components/SpinWithMathsCom/SpinMathMedium";
+import SpinWithMath from "./components/SpinWithMath";
 
 const App = () => {
   return (
@@ -113,6 +115,7 @@ const App = () => {
             {/* Routes Content */}
             <div className="flex-grow overflow-y-auto">
               <Routes>
+                <Route path="/" element={<AddUsers/>} />
                 <Route element={<Layout />}>
                   <Route path="/home" element={<Body />} />
                   <Route path="/profile" element={<Profile />} />
@@ -122,6 +125,8 @@ const App = () => {
                   <Route path="/streak" element={<Leadership />} />
                 </Route>
                 <Route path="/game-rules" element={<GameRules />} />
+                <Route path="/fruit" element={<AddGroup/>} />
+                <Route path="/spin" element={<SpinWithMath/>} />
                 <Route path="games-landing" element={<BrushedResults />} />
                 {/* <Route path="/games" element={<Games/>} /> */}
                 <Route path="/games" element={<Games />}>

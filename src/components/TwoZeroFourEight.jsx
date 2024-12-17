@@ -1,11 +1,11 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const SIZE = 4;
 
 const Game = () => {
   const [board, setBoard] = useState(initializeBoard);
-  const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [startTouch, setStartTouch] = useState(null);
 
   // Initialize the board with two random tiles
   function initializeBoard() {
@@ -37,7 +37,6 @@ const Game = () => {
     for (let i = 0; i < filteredRow.length - 1; i++) {
       if (filteredRow[i] === filteredRow[i + 1]) {
         filteredRow[i] *= 2;
-        setScore((prev) => prev + filteredRow[i]);
         filteredRow[i + 1] = 0;
       }
     }
@@ -86,6 +85,11 @@ const Game = () => {
     return true;
   }
 
+  // Get the highest score from the board
+  function getHighestScore(board) {
+    return Math.max(...board.flat());
+  }
+
   // Handle keypress events
   function handleKeyPress(event) {
     if (gameOver) return;
@@ -95,6 +99,35 @@ const Game = () => {
     if (event.key === "ArrowDown") newBoard = moveDown(board);
     if (event.key === "ArrowLeft") newBoard = moveLeft(board);
     if (event.key === "ArrowRight") newBoard = moveRight(board);
+
+    if (newBoard && JSON.stringify(newBoard) !== JSON.stringify(board)) {
+      addRandomTile(newBoard);
+      setBoard(newBoard);
+      if (isGameOver(newBoard)) setGameOver(true);
+    }
+  }
+
+  // Handle touch events for mobile
+  function handleTouchStart(e) {
+    const touch = e.touches[0];
+    setStartTouch({ x: touch.clientX, y: touch.clientY });
+  }
+
+  function handleTouchEnd(e) {
+    if (!startTouch) return;
+
+    const touch = e.changedTouches[0];
+    const deltaX = touch.clientX - startTouch.x;
+    const deltaY = touch.clientY - startTouch.y;
+
+    let newBoard;
+    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+      // Horizontal swipe
+      newBoard = deltaX > 0 ? moveRight(board) : moveLeft(board);
+    } else {
+      // Vertical swipe
+      newBoard = deltaY > 0 ? moveDown(board) : moveUp(board);
+    }
 
     if (newBoard && JSON.stringify(newBoard) !== JSON.stringify(board)) {
       addRandomTile(newBoard);
@@ -128,9 +161,13 @@ const Game = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200">
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-gray-200"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <h1 className="text-4xl font-bold mb-4">2048 Game</h1>
-      <div className="text-lg font-semibold mb-2">Score: {score}</div>
+      <div className="text-lg font-semibold mb-2">Highest Tile: {getHighestScore(board)}</div>
       {gameOver && <div className="text-red-600 font-bold mb-2">Game Over!</div>}
       <div className="grid grid-cols-4 gap-4 bg-gray-400 p-4 rounded-lg shadow-lg">
         {board.map((row, rowIndex) =>

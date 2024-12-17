@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Wheel } from "react-custom-roulette";
 
-const SpinWheel = () => {
+const SpinWithMath = () => {
   // Generate random addition and subtraction questions
   const generateQuestions = () => {
     const questions = [];
@@ -107,4 +107,4 @@ const SpinWheel = () => {
   );
 };
 
-export default SpinWheel;
+export default SpinWithMath;
