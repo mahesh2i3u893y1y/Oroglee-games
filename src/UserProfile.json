@@ -1,28 +1,26 @@
 {
     "users": [
       {
-        "id": "parent_001",
+        "id": "parent_0001",
         "name": "John Doe",
         "email": "john.doe@example.com",
         "password": "hashed_password_here",
         "role": "parent",
         "children": [
           {
-            "id": "child_001",
+            "id": "child_0001",
             "name": "Emma",
             "age": 7,
             "profilePic": "profile_pic_url",
             "brushingData": [
               {
                 "date": "2024-12-01",
-                "brushedMorning": true,
-                "brushedEvening": false,
+                "brushed": true,
                 "missed": false
               },
               {
                 "date": "2024-12-02",
-                "brushedMorning": false,
-                "brushedEvening": false,
+                "brushed": false,
                 "missed": true
               }
             ]
@@ -35,78 +33,15 @@
             "brushingData": [
               {
                 "date": "2024-12-01",
-                "brushedMorning": true,
-                "brushedEvening": true,
+                "brushed": true,
+                "missed": false
+              },
+              {
+                "date": "2024-12-02",
+                "brushed": true,
                 "missed": false
               }
             ]
-          }
-        ],
-        "groups": [
-          {
-            "id": "group_001",
-            "name": "Healthy Teeth Club",
-            "createdBy": "parent_001",
-            "members": [
-              {
-                "id": "parent_001",
-                "name": "John Doe",
-                "role": "admin",
-                "status": "accepted"
-              },
-              {
-                "id": "parent_002",
-                "name": "Jane Smith",
-                "role": "member",
-                "status": "accepted"
-              }
-            ],
-            "invites": [
-              {
-                "id": "invite_001",
-                "from": "parent_001",
-                "to": "parent_003",
-                "status": "pending"
-              },
-              {
-                "id": "invite_002",
-                "from": "parent_003",
-                "to": "parent_001",
-                "status": "rejected"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "id": "parent_002",
-        "name": "Jane Smith",
-        "email": "jane.smith@example.com",
-        "password": "hashed_password_here",
-        "role": "parent",
-        "children": [
-          {
-            "id": "child_003",
-            "name": "Sophia",
-            "age": 6,
-            "profilePic": "profile_pic_url",
-            "brushingData": []
-          }
-        ],
-        "groups": [
-          {
-            "id": "group_002",
-            "name": "Night Owls",
-            "createdBy": "parent_002",
-            "members": [
-              {
-                "id": "parent_002",
-                "name": "Jane Smith",
-                "role": "admin",
-                "status": "accepted"
-              }
-            ],
-            "invites": []
           }
         ]
       }

@@ -1,14 +1,19 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Confetti from "react-dom-confetti";
+import win from "../../assets/win.gif";
 
-const ReOrderGameCopy = ({questions}) => {
-
+const ReOrderGameCopy = ({ questions }) => {
+    const navigate = useNavigate(); // To redirect the user
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [currentOrder, setCurrentOrder] = useState([]);
   const [score, setScore] = useState(0);
   const [showEffect, setShowEffect] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [showResults, setShowResults] = useState(false); // To show the results after game ends
+
+  const questions_length = questions.length;
 
   // Shuffle function to randomize array and ensure it's not in correct order
   const shuffleArray = (array, correctOrder) => {
@@ -58,9 +63,13 @@ const ReOrderGameCopy = ({questions}) => {
     if (JSON.stringify(newOrder) === JSON.stringify(questions[currentQuestion].correctOrder)) {
       setScore(score + 1);
       setShowEffect(true);
-      setTimeout(() => setShowEffect(false), 1000); // Hide confetti after 1 second
+      setTimeout(() => {
+        setShowEffect(false);
+        handleNextQuestion(); // Automatically move to next question after correct answer
+      }, 1000); // Hide confetti and move to next question after 1 second
     }
   };
+
 
   const handleNextQuestion = () => {
     const nextQuestion = currentQuestion + 1;
@@ -68,6 +77,7 @@ const ReOrderGameCopy = ({questions}) => {
       setCurrentQuestion(nextQuestion);
     } else {
       setGameOver(true); // End the game when all questions are answered
+      setShowResults(true); // Show results popup
     }
   };
 
@@ -76,14 +86,19 @@ const ReOrderGameCopy = ({questions}) => {
     setCurrentOrder([]);
     setScore(0);
     setGameOver(false);
+    setShowResults(false); // Reset results display
   };
 
-  if (gameOver) {
+  const handleCloseResults = () => {
+    navigate("/home"); // Redirect to home page
+  };
+
+  if (gameOver && !showResults) {
     return (
       <div className="min-h-screen bg-blue-100 flex flex-col items-center justify-center p-4">
         <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center">
           <h1 className="text-2xl font-bold mb-4">Game Over!</h1>
-          <p className="text-lg font-semibold mb-4">Your final score is {score}</p>
+          <p className="text-lg font-semibold mb-4">Your final score is {score}/{questions_length}</p>
           <button
             onClick={handleRestartGame}
             className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg"
@@ -123,18 +138,42 @@ const ReOrderGameCopy = ({questions}) => {
           ))}
         </div>
 
-        <button
-          onClick={handleNextQuestion}
-          className="mt-6 bg-blue-500 text-white px-4 py-2 rounded-lg w-full"
-        >
-          Next
-        </button>
+        <div className="flex justify-end mt-6">
+          <button
+            onClick={handleNextQuestion}
+            className="bg-gray-500 text-white px-4 py-2 rounded-lg"
+          >
+            skip
+          </button>
+        </div>
       </div>
 
       {/* Confetti Effect */}
       <div className="absolute">
         <Confetti active={showEffect} config={confettiConfig} />
       </div>
+
+      {/* Results Popup */}
+      {showResults && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
+            <img
+              src={win}
+              alt="Win"
+              className="w-48 mx-auto mb-4"
+            />
+            <h2 className="text-xl font-bold text-green-600 mb-4">
+              🎊Congratulations! Your final score is🎊 <br/> {score}/{questions_length}
+            </h2>
+            <button
+              onClick={handleCloseResults}
+              className="mt-4 px-6 py-3 bg-blue-500 text-white font-bold rounded hover:bg-blue-600"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

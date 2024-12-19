@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import Confetti from "react-confetti";
+import win from "../../assets/win.gif"
 
-// Generic Game Component
 const MatchingGameCopy = ({ gameData, title }) => {
   const [shuffledNames, setShuffledNames] = useState([]);
   const [shuffledImages, setShuffledImages] = useState([]);
@@ -9,7 +11,9 @@ const MatchingGameCopy = ({ gameData, title }) => {
   const [selectedName, setSelectedName] = useState(null);
   const [message, setMessage] = useState("");
   const [correctMatches, setCorrectMatches] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
 
+  const navigate = useNavigate()
   const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
   useEffect(() => {
@@ -26,6 +30,11 @@ const MatchingGameCopy = ({ gameData, title }) => {
         setScore(score + 1);
         setMessage(`Correct! ${matchedItem.name} matched successfully!`);
         setCorrectMatches([...correctMatches, matchedItem.id]);
+
+        // Check if all cards are matched
+        if (correctMatches.length + 1 === gameData.length) {
+          setTimeout(() => setShowPopup(true), 500); // Show popup with delay
+        }
       } else {
         setMessage("Oops! That's not the correct match.");
       }
@@ -48,6 +57,11 @@ const MatchingGameCopy = ({ gameData, title }) => {
       setScore(score + 1);
       setMessage(`Correct! ${item.name} matched successfully!`);
       setCorrectMatches([...correctMatches, item.id]);
+
+      // Check if all cards are matched
+      if (correctMatches.length + 1 === gameData.length) {
+        setTimeout(() => setShowPopup(true), 500); // Show popup with delay
+      }
     } else {
       setMessage("Oops! That's not the correct match.");
     }
@@ -60,7 +74,12 @@ const MatchingGameCopy = ({ gameData, title }) => {
     setSelectedName(null);
     setShuffledNames(shuffleArray([...gameData.map((item) => item.name)]));
     setShuffledImages(shuffleArray([...gameData]));
+    setShowPopup(false);
   };
+
+  const handleClose =() => {
+    navigate("/home")
+  }
 
   return (
     <div className="game-container p-6 bg-gray-100 min-h-screen flex flex-col items-center">
@@ -121,9 +140,35 @@ const MatchingGameCopy = ({ gameData, title }) => {
       >
         Reset Game
       </button>
+
+      {showPopup && (
+        <>
+          <Confetti width={window.innerWidth} height={window.innerHeight} />
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-8 rounded-lg text-center max-w-sm w-full shadow-xl">
+              <h2 className="text-3xl font-bold text-green-600 mb-4">🎉 Congratulations! 🎉</h2>
+              <p className="text-lg mb-4">You have matched all cards!</p>
+              <img src={win} alt="Win-gif" className="w-48 mx-auto mb-4"/>
+              <p className="text-xl font-bold mb-6">Final Score: {score}</p>
+              
+              <div className="flex justify-between">
+              <button
+                onClick={handleReset}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700"
+              >
+                Reset
+              </button>
+              <button onClick={handleClose}
+              className="px-6 py-2 bg-red-400 text-white rounded-lg shadow-lg hover:bg-red-700">
+                close
+              </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
 
-
-export default MatchingGameCopy
+export default MatchingGameCopy;

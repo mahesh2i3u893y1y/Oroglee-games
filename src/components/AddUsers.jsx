@@ -86,7 +86,7 @@ const AddUsers = () => {
         {users.map((user) => (
           <div
             key={user.id}
-            className="relative group border border-gray-300 rounded-[50%] cursor-pointer text-lg md:text-2xl font-bold bg-purple-500 w-20 h-20 md:w-32 md:h-32 flex justify-center items-center"
+            className="relative group border border-gray-300 rounded-[50%] cursor-pointer text-lg md:text-5xl font-bold bg-purple-500 w-20 h-20 md:w-32 md:h-32 flex justify-center items-center"
             onClick={() => handleUserClick(user)}
           >
             {/* Profile Image or Initial */}

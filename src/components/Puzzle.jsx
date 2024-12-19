@@ -8,9 +8,11 @@ const PuzzleGame = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [topScore, setTopScore] = useState(null);
-  const [currentImage, setCurrentImage] = useState(null); // Store the current image
+  const [currentImage, setCurrentImage] = useState(null);
+  const [activePiece, setActivePiece] = useState(null);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  const gridSize = 3; // 3x3 puzzle (adjustable)
+  const gridSize = 3; // 3x3 grid
   const defaultImages = [
     "https://cdn.pixabay.com/photo/2024/05/29/21/16/dental-8797255_1280.png",
     "https://cdn.pixabay.com/photo/2020/08/27/18/31/teeth-5522653_1280.jpg",
@@ -23,9 +25,11 @@ const PuzzleGame = () => {
 
   useEffect(() => {
     initializeGame();
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  // Start timer
   useEffect(() => {
     let interval;
     if (timerActive) {
@@ -33,6 +37,10 @@ const PuzzleGame = () => {
     }
     return () => clearInterval(interval);
   }, [timerActive]);
+
+  const checkScreenSize = () => {
+    setIsSmallScreen(window.innerWidth < 768); // Check if screen is smaller than 768px
+  };
 
   const shuffleArray = (array) => {
     const shuffled = [...array];
@@ -61,8 +69,6 @@ const PuzzleGame = () => {
     setTime(0);
     setTimerActive(true);
     setIsGameOver(false);
-
-    // Set a random image for this game session
     setCurrentImage(defaultImages[Math.floor(Math.random() * defaultImages.length)]);
   };
 
@@ -73,13 +79,26 @@ const PuzzleGame = () => {
   const handleDrop = (e, target) => {
     e.preventDefault();
     const piece = JSON.parse(e.dataTransfer.getData("piece"));
+    placePiece(piece, target);
+  };
 
-    // Check if dropped in the correct position
+  const handleTouchStart = (piece) => {
+    setActivePiece(piece);
+  };
+
+  const handleTouchEnd = (target) => {
+    if (activePiece) {
+      placePiece(activePiece, target);
+      setActivePiece(null);
+    }
+  };
+
+  const placePiece = (piece, target) => {
     if (
       piece.originalRow === target.row &&
       piece.originalCol === target.col
     ) {
-      soundEffect.play(); // Play sound on correct placement
+      soundEffect.play();
       setCompletedPieces((prev) => [...prev, piece.id]);
       setPieces((prev) =>
         prev.map((p) =>
@@ -90,7 +109,6 @@ const PuzzleGame = () => {
       );
     }
 
-    // End game if all pieces are correctly placed
     if (completedPieces.length + 1 === gridSize * gridSize) {
       setTimerActive(false);
       setIsGameOver(true);
@@ -100,11 +118,8 @@ const PuzzleGame = () => {
     }
   };
 
-  const handleDragOver = (e) => e.preventDefault();
-
-  // Restart the game and change the image
   const handleRestart = () => {
-    initializeGame(); // This will reset the game and select a new image
+    initializeGame();
   };
 
   return (
@@ -113,24 +128,23 @@ const PuzzleGame = () => {
         Enhanced Puzzle Maker Game
       </h1>
 
-      {/* Timer */}
       <div className="text-lg font-medium mb-4">
         Timer: <span className="text-purple-700">{time}s</span>
       </div>
 
-      {/* Top Score */}
       {topScore !== null && (
         <div className="text-lg font-medium mb-4">
           Top Score: <span className="text-green-700">{topScore}s</span>
         </div>
       )}
 
-      {/* Blurred Original Image */}
       <div
-        className="relative mb-5 grid grid-cols-3 grid-rows-3 gap-1"
+        className="relative mb-5 grid gap-1"
         style={{
-          width: "300px",
-          height: "300px",
+          width: isSmallScreen ? "300px" : "300px", // Adjust puzzle size for small screens
+          height: isSmallScreen ? "300px" : "300px",
+          gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+          gridTemplateRows: `repeat(${gridSize}, 1fr)`,
         }}
       >
         {[...Array(gridSize * gridSize)].map((_, index) => {
@@ -150,14 +164,14 @@ const PuzzleGame = () => {
                 ) * 100}%`,
                 filter: isUnblurred ? "none" : "blur(5px)",
               }}
-              onDragOver={handleDragOver}
+              onDragOver={(e) => e.preventDefault()}
               onDrop={(e) => handleDrop(e, { row, col })}
+              onTouchEnd={() => handleTouchEnd({ row, col })}
             ></div>
           );
         })}
       </div>
 
-      {/* Puzzle Pieces */}
       <div className="flex flex-wrap justify-center gap-2 mb-5">
         {pieces.map(
           (piece) =>
@@ -166,7 +180,8 @@ const PuzzleGame = () => {
                 key={piece.id}
                 draggable
                 onDragStart={(e) => handleDragStart(e, piece)}
-                className="w-24 h-24 border border-gray-300 bg-cover bg-center cursor-grab"
+                onTouchStart={() => handleTouchStart(piece)}
+                className="w-16 h-16 md:w-24 md:h-24 border border-gray-300 bg-cover bg-center cursor-grab"
                 style={{
                   backgroundImage: `url(${currentImage})`,
                   backgroundSize: `${gridSize * 100}%`,
@@ -179,14 +194,12 @@ const PuzzleGame = () => {
         )}
       </div>
 
-      {/* Completion Message */}
       {isGameOver && (
         <div className="text-lg font-semibold text-green-500 mb-4">
           🎉 Congratulations! You completed the puzzle in {time} seconds! 🎉
         </div>
       )}
 
-      {/* Restart Button */}
       <button
         onClick={handleRestart}
         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"

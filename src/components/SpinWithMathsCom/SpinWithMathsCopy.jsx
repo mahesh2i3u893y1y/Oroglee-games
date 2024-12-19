@@ -12,9 +12,10 @@ const SpinWithMathsCopy = ({ level, generateQuestions }) => {
   const [message, setMessage] = useState("");
   const [visitedIndices, setVisitedIndices] = useState([]); // To track visited questions
   const [gameStarted, setGameStarted] = useState(false); // Controls visibility of question box
+  const [questionAnswered, setQuestionAnswered] = useState(true); // Track if the question is answered
 
   const handleSpinClick = () => {
-    if (spinsLeft === 0) return;
+    if (spinsLeft === 0 || !questionAnswered) return;
 
     if (!gameStarted) {
       setGameStarted(true); // Start the game on the first spin
@@ -37,6 +38,7 @@ const SpinWithMathsCopy = ({ level, generateQuestions }) => {
     setMustSpin(true);
     setMessage("");
     setCurrentAnswer("");
+    setQuestionAnswered(false); // Question needs to be answered before spinning again
   };
 
   const handleStopSpinning = () => {
@@ -63,18 +65,23 @@ const SpinWithMathsCopy = ({ level, generateQuestions }) => {
       )
     );
     setSpinsLeft((prev) => prev - 1);
+    setQuestionAnswered(true); // Enable spinning after answering
   };
 
   return (
     <div className="flex flex-col items-center justify-center bg-gray-100 h-screen p-4">
-      <h1 className="text-3xl font-bold mb-4">Math Spinner Game - {level.toUpperCase()} Level</h1>
-      <p className="text-lg mb-2">
-        Current Score: <strong>{score}</strong>
-      </p>
-      <p className="text-lg mb-4">
-        Spins Left: <strong>{spinsLeft}</strong>
-      </p>
-      <div className="flex gap-5">
+      <h1 className="text-3xl font-bold mb-4 text-center">
+        Math Spinner Game - {level.toUpperCase()} Level
+      </h1>
+      <div className="flex flex-col items-center">
+        <p className="text-lg mb-2">
+          Current Score: <strong>{score}</strong>
+        </p>
+        <p className="text-lg mb-4">
+          Spins Left: <strong>{spinsLeft}</strong>
+        </p>
+      </div>
+      <div className="flex flex-col md:flex-row gap-5 items-center justify-center">
         <div className="mb-6">
           <Wheel
             mustStartSpinning={mustSpin}
@@ -102,10 +109,10 @@ const SpinWithMathsCopy = ({ level, generateQuestions }) => {
             ]}
           />
         </div>
-        <div className="m-10">
+        <div className="m-10 w-full max-w-sm">
           {gameStarted && !mustSpin && spinsLeft > 0 && !questions[prizeNumber]?.answered && (
             <div className="flex flex-col items-center">
-              <p className="text-lg font-bold mb-4">
+              <p className="text-lg font-bold mb-4 text-center">
                 Question: {questions[prizeNumber]?.option}
               </p>
               <input
@@ -125,9 +132,11 @@ const SpinWithMathsCopy = ({ level, generateQuestions }) => {
           )}
           <button
             onClick={handleSpinClick}
-            disabled={mustSpin || spinsLeft === 0}
+            disabled={mustSpin || spinsLeft === 0 || !questionAnswered}
             className={`px-6 py-2 mt-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-600 ${
-              mustSpin || spinsLeft === 0 ? "opacity-50 cursor-not-allowed" : ""
+              mustSpin || spinsLeft === 0 || !questionAnswered
+                ? "opacity-50 cursor-not-allowed"
+                : ""
             }`}
           >
             {mustSpin
@@ -136,11 +145,11 @@ const SpinWithMathsCopy = ({ level, generateQuestions }) => {
               ? "Game Over"
               : "Spin"}
           </button>
-          {message && <p className="mt-4 text-lg">{message}</p>}
+          {message && <p className="mt-4 text-lg text-center">{message}</p>}
         </div>
       </div>
       {spinsLeft === 0 && (
-        <p className="text-xl mt-6 font-bold">
+        <p className="text-xl mt-6 font-bold text-center">
           Game Over! Your Final Score: {score}
         </p>
       )}

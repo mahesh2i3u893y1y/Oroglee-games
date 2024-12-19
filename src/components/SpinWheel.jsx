@@ -17,9 +17,7 @@ const SpinWheel = () => {
 
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
-  const [targetNumber] = useState(
-    Math.floor(Math.random() * numbers.length)
-  );
+  const [targetNumber] = useState(Math.floor(Math.random() * numbers.length));
   const [message, setMessage] = useState("");
 
   const handleSpinClick = () => {
@@ -38,43 +36,64 @@ const SpinWheel = () => {
   };
 
   return (
-    <div className="flex  items-center justify-around  bg-gray-100 p-5">
-      <div className="flex flex-col justify-center items-center">
-        <h1 className="text-3xl font-bold mb-4">Casino Spin Game</h1>
-        <p className="text-lg mb-2">
+    <div className="flex flex-col items-center justify-center bg-gray-100 p-5 min-h-screen">
+      <div className="w-full max-w-4xl">
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4">
+           Spin Game
+        </h1>
+        <p className="text-center text-lg sm:text-xl mb-6">
           Target Number: <strong>{numbers[targetNumber].option}</strong>
         </p>
-        <div className="mb-3">
+      </div>
+
+      <div className="flex flex-col md:flex-row items-center justify-between gap-8 w-full max-w-4xl">
+        {/* Wheel Section */}
+        <div className="flex flex-col items-center">
           <Wheel
             mustStartSpinning={mustSpin}
             prizeNumber={prizeNumber}
             data={numbers}
             onStopSpinning={handleStopSpinning}
             outerBorderColor="#ccc"
-            outerBorderWidth={8} 
-            innerRadius={20} 
+            outerBorderWidth={8}
+            innerRadius={20}
             innerBorderColor="#f0f0f0"
             radiusLineColor="#ddd"
             radiusLineWidth={2}
             textColors={["#333"]}
-            backgroundColors={["#FFDDC1", "#FFABAB", "#32a852", "#32a892", "#8532a8", "#a832a4", "#a8327b", "#a83248", "#a84432", "#3267a8"]}
+            backgroundColors={[
+              "#FFDDC1",
+              "#FFABAB",
+              "#32a852",
+              "#32a892",
+              "#8532a8",
+              "#a832a4",
+              "#a8327b",
+              "#a83248",
+              "#a84432",
+              "#3267a8",
+            ]}
           />
         </div>
-      </div>
-      <div>
-        <button
-          onClick={handleSpinClick}
-          disabled={mustSpin}
-          className="px-6 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-600"
-        >
-          {mustSpin ? "Spinning..." : "Spin"}
-        </button>
-        {message && <p className="mt-4 text-lg">{message}</p>}
+
+        {/* Controls Section */}
+        <div className="flex flex-col items-center gap-4">
+          <button
+            onClick={handleSpinClick}
+            disabled={mustSpin}
+            className={`px-6 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-600 ${
+              mustSpin ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            {mustSpin ? "Spinning..." : "Spin"}
+          </button>
+          {message && (
+            <p className="text-lg text-center mt-4 text-gray-700">{message}</p>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
 export default SpinWheel;
-
-

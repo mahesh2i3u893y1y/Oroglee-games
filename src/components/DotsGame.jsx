@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const gridSize = 10;
-const wordList = ['REACT', 'JAVASCRIPT', 'CSS', 'HTML', 'TAILWIND', 'FUNCTION', 'COMPONENT', 'HOOK', 'STATE', 'PROPS'];
+  const wordList = ['BRUSH', 'TOOTHPASTE', 'PEN', 'HOME', 'DOCTOR', 'SCHOOL', 'PLAY', 'HOME', 'CAVITY', 'FRUITS'];
 const colors = ['bg-red-200', 'bg-green-200', 'bg-blue-200', 'bg-yellow-200', 'bg-purple-200', 'bg-pink-200', 'bg-orange-200', 'bg-teal-200', 'bg-indigo-200', 'bg-cyan-200'];
 
 const generateEmptyGrid = (size) => {

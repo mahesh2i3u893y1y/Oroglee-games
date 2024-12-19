@@ -3,6 +3,7 @@ import { CgProfile } from "react-icons/cg";
 import { TbFlag3Filled } from "react-icons/tb";
 import { GiPoliceBadge } from "react-icons/gi";
 import { SiAmazongames } from "react-icons/si";
+import { MdGroups2 } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
@@ -44,6 +45,12 @@ const Sidebar = () => {
                 <Link to="/games" className={getLinkClass("/games")}>
                     <SiAmazongames className="text-[23px]" />
                     <p className="font-sans">Games</p>
+                </Link>
+            </div>
+            <div>
+                <Link to="/groups" className={getLinkClass("/groups")}>
+                    <MdGroups2 className="text-[23px]" />
+                    <p className="font-sans">Groups</p>
                 </Link>
             </div>
         </div>

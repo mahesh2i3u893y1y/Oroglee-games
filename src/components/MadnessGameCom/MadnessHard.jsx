@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Confetti from "react-confetti";
 
 const initialGrid = [
   [null, "+", 1, "+", null, "=", 9],
@@ -12,6 +13,7 @@ const initialGrid = [
 
 const MadnessHard = () => {
   const [grid, setGrid] = useState(initialGrid);
+  const [showMessage, setShowMessage] = useState({ success: false, error: false });
 
   const isValid = () => {
     let isCorrect = true;
@@ -55,9 +57,9 @@ const MadnessHard = () => {
     }
 
     if (isCorrect) {
-      alert("Congratulations! You've solved the puzzle! 🎉");
+      setShowMessage({ success: true, error: false });
     } else {
-      alert("Some rows or columns are incorrect. Try again! 🙃");
+      setShowMessage({ success: false, error: true });
     }
   };
 
@@ -71,17 +73,21 @@ const MadnessHard = () => {
     setGrid(newGrid);
   };
 
+  const restartGame = () => {
+    setGrid(initialGrid);
+    setShowMessage({ success: false, error: false });
+  };
+
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-2xl font-bold mb-4">Classroom Madness Puzzle</h1>
+    <div className="flex flex-col items-center relative">
+      <h1 className="text-2xl font-bold mb-4">Classroom Madness Puzzle - Hard Level</h1>
       <div className="grid grid-cols-7 gap-1">
         {grid.map((row, rowIndex) =>
           row.map((cell, colIndex) => (
             <div
               key={`${rowIndex}-${colIndex}`}
               className={`h-12 w-12 flex items-center justify-center border text-xl font-bold ${
-                (colIndex === 6 || rowIndex === 6 || cell === "=") &&
-                "bg-gray-200"
+                (colIndex === 6 || rowIndex === 6 || cell === "=") && "bg-gray-200"
               } ${cell === "+" && "bg-blue-200"}`}
             >
               {cell === null || typeof cell === "number" ? (
@@ -108,10 +114,50 @@ const MadnessHard = () => {
       </button>
       <button
         className="mt-4 px-6 py-2 bg-red-500 text-white font-bold rounded shadow-md hover:bg-red-600"
-        onClick={() => setGrid(initialGrid)}
+        onClick={restartGame}
       >
         Reset Puzzle
       </button>
+
+      {/* Success Popup */}
+      {showMessage.success && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 text-center shadow-lg relative">
+            <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+              <Confetti
+                width={300}
+                height={300}
+                recycle={false}
+                numberOfPieces={150}
+              />
+            </div>
+            <h2 className="text-3xl font-bold text-green-500 mb-4">Congratulations!</h2>
+            <p className="text-lg mb-6">You have solved the puzzle! 🎉</p>
+            <button
+              className="px-6 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-600"
+              onClick={restartGame}
+            >
+              Restart
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Error Popup */}
+      {showMessage.error && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 text-center shadow-lg">
+            <h2 className="text-3xl font-bold text-red-500 mb-4">Try Again</h2>
+            <p className="text-lg mb-6">Some rows or columns are incorrect. 🙃</p>
+            <button
+              className="px-6 py-2 bg-blue-500 text-white font-bold rounded hover:bg-blue-600"
+              onClick={() => setShowMessage({ success: false, error: false })}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

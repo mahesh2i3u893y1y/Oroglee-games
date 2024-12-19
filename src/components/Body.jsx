@@ -15,7 +15,7 @@ const Body = () => {
       </div> */}
 
       {/* Game Section */}
-      <div className="col-span-12 md:col-span-7 h-full bg-slate-100 flex justify-center items-center overflow-y-auto hidden-scrollbar">
+      <div className="col-span-12 md:col-span-7  bg-slate-100 flex justify-center items-center overflow-y-auto hidden-scrollbar">
         <Game />
       </div>
 

@@ -121,12 +121,12 @@ const App = () => {
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/badges" element={<Badges />} />
                   <Route path="/journey" element={<Journey />} />
+                  <Route path="/groups" element={<AddGroup/>} />
                   <Route path="/leaderBoard" element={<ViewLeaderBoard />} />
                   <Route path="/streak" element={<Leadership />} />
                 </Route>
                 <Route path="/game-rules" element={<GameRules />} />
-                <Route path="/fruit" element={<AddGroup/>} />
-                <Route path="/spin" element={<SpinWithMath/>} />
+                <Route path="/spin" element={<SpinWithMath/>}/>
                 <Route path="games-landing" element={<BrushedResults />} />
                 {/* <Route path="/games" element={<Games/>} /> */}
                 <Route path="/games" element={<Games />}>
@@ -191,7 +191,7 @@ const App = () => {
                   <Route path="findIt/medium/3" element={<FindItMediumThree />} />
                   <Route path="findIt/hard/1" element={<FindItHardOne />} />
                   <Route path="findIt/hard/2" element={<FindItHardTwo />} />
-                  <Route path="findIt/three/3" element={<FindItHardThree />} />
+                  <Route path="findIt/hard/3" element={<FindItHardThree />} />
                   <Route path="missing-letter-easy-1" element={<MissingLetterMain />} />
                   <Route path="missing-letter-easy-2" element={<MissingLettersEasyOne />} />
                   <Route path="missing-letter-easy-3" element={<MissingLettersEasyTwo />} />
@@ -218,7 +218,7 @@ const App = () => {
             </div>
 
             {/* Mobile Navigation */}
-            <div className="md:hidden fixed bottom-0 left-0 w-full z-50">
+            <div className="md:hidden  fixed bottom-0 left-0 w-full z-50">
               <MobileNavs />
             </div>
           </div>
