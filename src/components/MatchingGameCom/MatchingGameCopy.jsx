@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import Confetti from "react-confetti";
 import win from "../../assets/win.gif"
 
+
 const MatchingGameCopy = ({ gameData, title }) => {
   const [shuffledNames, setShuffledNames] = useState([]);
   const [shuffledImages, setShuffledImages] = useState([]);
@@ -77,7 +78,7 @@ const MatchingGameCopy = ({ gameData, title }) => {
     setShowPopup(false);
   };
 
-  const handleClose =() => {
+  const handleClose = () => {
     navigate("/home")
   }
 
@@ -106,7 +107,7 @@ const MatchingGameCopy = ({ gameData, title }) => {
                 onClick={() => handleMobileSelection(name)}
                 draggable
                 onDragStart={(e) => handleDragStart(e, gameData.find((item) => item.name === name))}
-                className="draggable-name w-1/6 px-2 py-3 bg-blue-300 rounded-lg cursor-pointer text-center shadow-lg hover:bg-blue-400 transition"
+                className="draggable-name w-2/6 md:w-1/6 px-2 py-3 bg-blue-300 rounded-lg cursor-pointer text-center shadow-lg hover:bg-blue-400 transition"
               >
                 {name}
               </div>
@@ -123,9 +124,8 @@ const MatchingGameCopy = ({ gameData, title }) => {
                 onClick={() => handleMobileSelection(item.name)}
                 onDrop={(e) => handleDrop(e, item)}
                 onDragOver={(e) => e.preventDefault()}
-                className={`fruit-image p-4 rounded-lg shadow-lg border-4 border-dashed ${
-                  correctMatches.includes(item.id) ? "border-green-500" : "border-gray-300"
-                }`}
+                className={`fruit-image p-4 rounded-lg shadow-lg border-4 border-dashed ${correctMatches.includes(item.id) ? "border-green-500" : "border-gray-300"
+                  }`}
               >
                 <img src={item.img} alt={item.name} className="w-20 h-20" />
               </div>
@@ -143,30 +143,41 @@ const MatchingGameCopy = ({ gameData, title }) => {
 
       {showPopup && (
         <>
-          <Confetti width={window.innerWidth} height={window.innerHeight} />
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-8 rounded-lg text-center max-w-sm w-full shadow-xl">
+            <div className="bg-white p-8 rounded-lg text-center max-w-sm w-full shadow-xl relative">
+              {/* Confetti Effect Limited to Popup */}
+              <div className="absolute inset-0 pointer-events-none">
+                <Confetti
+                  width={300} // Width of the popup
+                  height={300} // Height of the popup
+                  numberOfPieces={150} // Adjust for the amount of confetti
+                  gravity={0.4} // Fall speed of confetti
+                />
+              </div>
               <h2 className="text-3xl font-bold text-green-600 mb-4">🎉 Congratulations! 🎉</h2>
               <p className="text-lg mb-4">You have matched all cards!</p>
-              <img src={win} alt="Win-gif" className="w-48 mx-auto mb-4"/>
+              <img src={win} alt="Win-gif" className="w-48 mx-auto mb-4" />
               <p className="text-xl font-bold mb-6">Final Score: {score}</p>
-              
+
               <div className="flex justify-between">
-              <button
-                onClick={handleReset}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700"
-              >
-                Reset
-              </button>
-              <button onClick={handleClose}
-              className="px-6 py-2 bg-red-400 text-white rounded-lg shadow-lg hover:bg-red-700">
-                close
-              </button>
+                <button
+                  onClick={handleReset}
+                  className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700"
+                >
+                  Reset
+                </button>
+                <button
+                  onClick={handleClose}
+                  className="px-6 py-2 bg-red-400 text-white rounded-lg shadow-lg hover:bg-red-700"
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>
         </>
       )}
+
     </div>
   );
 };

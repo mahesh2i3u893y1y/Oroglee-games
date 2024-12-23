@@ -19,10 +19,10 @@ const dayDataSlice = createSlice({
       let currentDate;
     
       if (!state.baseDate) {
-        state.baseDate = new Date().toISOString(); // Store as an ISO string
-        currentDate = new Date(state.baseDate); // Convert back to Date when needed
+        state.baseDate = new Date().toISOString(); 
+        currentDate = new Date(state.baseDate); 
       } else {
-        currentDate = new Date(state.baseDate); // baseDate is now an ISO string
+        currentDate = new Date(state.baseDate); 
         currentDate.setDate(currentDate.getDate() + newDayIndex - 1);
       }
     

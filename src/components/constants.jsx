@@ -292,10 +292,10 @@ export const sportsQuestions = [
 ];
 
 export const professionalQuestions = [
-  { mainImage: "👨‍⚕️", options: ["🏥", "🩺","🍔"], correctIndex: 1 },
+  { mainImage: "👨‍⚕️", options: ["🏥", "🩺","🍔"], correctIndex: 2 },
   { mainImage: "👩‍🏫", options: ["📚", "🎤", "📖"], correctIndex: 1 },
-  { mainImage: "👮", options: ["🎃","🚔", "🔫"], correctIndex: 1 },
-  { mainImage: "👨‍🍳", options: ["🍳", "🍲", "🏀"], correctIndex: 1 },
+  { mainImage: "👮", options: ["🎃","🚔", "🔫"], correctIndex: 0 },
+  { mainImage: "👨‍🍳", options: ["🍳", "🍲", "🏀"], correctIndex: 2 },
 ];
 
 

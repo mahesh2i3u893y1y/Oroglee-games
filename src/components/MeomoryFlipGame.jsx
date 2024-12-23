@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
+import win from "../assets/win.gif"
+import loose from "../assets/loose.gif"
+import { useNavigate } from "react-router-dom";
 
-
-const MeomoryFlipGame = () => {
+const MemoryFlipGame = () => {
     const [cards, setCards] = useState([]);
     const [flippedCards, setFlippedCards] = useState([]);
     const [matchedCards, setMatchedCards] = useState([]);
@@ -9,6 +11,9 @@ const MeomoryFlipGame = () => {
     const [time, setTime] = useState(90);
     const [timerActive, setTimerActive] = useState(false);
     const [topScore, setTopScore] = useState(null);
+    const [modal, setModal] = useState({ visible: false, type: "" });
+
+    const navigate = useNavigate();
 
     const images = [
         "https://cdn.pixabay.com/photo/2024/08/13/22/30/ai-generated-8967325_1280.jpg",
@@ -40,6 +45,7 @@ const MeomoryFlipGame = () => {
         setMoves(0);
         setTime(90);
         setTimerActive(false);
+        setModal({ visible: false, type: "" });
     };
 
     useEffect(() => {
@@ -54,7 +60,7 @@ const MeomoryFlipGame = () => {
         } else if (time === 0) {
             clearInterval(interval);
             setTimerActive(false);
-            alert("Time's up! Better luck next time.");
+            setModal({ visible: true, type: "lose" });
         }
         return () => clearInterval(interval);
     }, [timerActive, time]);
@@ -89,9 +95,7 @@ const MeomoryFlipGame = () => {
     useEffect(() => {
         if (matchedCards.length === cards.length && cards.length > 0) {
             setTimerActive(false);
-            alert(
-                `Congratulations! You completed the game in ${moves} moves and ${90 - time} seconds.`
-            );
+            setModal({ visible: true, type: "win" });
 
             if (!topScore || moves < topScore.moves) {
                 setTopScore({ moves, time: 90 - time });
@@ -100,8 +104,7 @@ const MeomoryFlipGame = () => {
     }, [matchedCards, cards, moves, time, topScore]);
 
     return (
-        <div className=" h-screen col-span-12 md:col-span-10  z-10 overflow-y-scroll">
-
+        <div className="h-screen col-span-12 md:col-span-10 z-10 overflow-y-scroll">
             <h1 className="text-purple-800 text-3xl font-semibold text-center my-5">
                 Memory Flip Game
             </h1>
@@ -131,39 +134,45 @@ const MeomoryFlipGame = () => {
             )}
 
             {/* Game Board */}
-            <div className="flex justify-center items-center flex-wrap px-1  md:grid-cols-5 gap-2 w-full  md:w-1/2 mx-auto">
+            <div className="flex justify-center items-center flex-wrap px-1 md:grid-cols-5 gap-2 w-full md:w-1/2 mx-auto">
                 {cards.map((card, index) => (
                     <div
                         key={index}
                         className="relative w-16 h-16 sm:w-20 sm:h-20"
                     >
                         <div
-                            className={`relative w-full h-full bg-purple-500 rounded-md cursor-pointer transform transition-transform duration-500 ${flippedCards.includes(index) || matchedCards.includes(index)
-                                ? "rotate-y-180"
-                                : ""
-                                }`}
+                            className={`relative w-full h-full bg-purple-500 rounded-md cursor-pointer transform transition-transform duration-500 ${
+                                flippedCards.includes(index) ||
+                                matchedCards.includes(index)
+                                    ? "rotate-y-180"
+                                    : ""
+                            }`}
                             onClick={() => handleCardClick(index)}
                         >
-                            {/* Front of the card (Suspense image) */}
+                            {/* Front of the card */}
                             <div
-                                className={`absolute w-full h-full bg-purple-400 rounded-md flex justify-center items-center ${flippedCards.includes(index) || matchedCards.includes(index)
-                                    ? "hidden"
-                                    : ""
-                                    }`}
+                                className={`absolute w-full h-full bg-purple-400 rounded-md flex justify-center items-center ${
+                                    flippedCards.includes(index) ||
+                                    matchedCards.includes(index)
+                                        ? "hidden"
+                                        : ""
+                                }`}
                             >
                                 <img
-                                    src="https://cdn.pixabay.com/photo/2014/09/03/07/59/question-mark-434153_1280.png" // Replace this with your image URL
+                                    src="https://cdn.pixabay.com/photo/2014/09/03/07/59/question-mark-434153_1280.png"
                                     alt="Card front"
                                     className="w-full h-full object-cover"
                                 />
                             </div>
 
-                            {/* Back of the card (Image) */}
+                            {/* Back of the card */}
                             <div
-                                className={`absolute w-full h-full backface-hidden rounded-md ${flippedCards.includes(index) || matchedCards.includes(index)
-                                    ? "block"
-                                    : "hidden"
-                                    }`}
+                                className={`absolute w-full h-full backface-hidden rounded-md ${
+                                    flippedCards.includes(index) ||
+                                    matchedCards.includes(index)
+                                        ? "block"
+                                        : "hidden"
+                                }`}
                             >
                                 <img
                                     src={card}
@@ -175,9 +184,60 @@ const MeomoryFlipGame = () => {
                     </div>
                 ))}
             </div>
+
+            {/* Modal */}
+            {modal.visible && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white rounded-lg shadow-lg p-6 text-center w-96">
+                        {modal.type === "win" ? (
+                            <>
+                                <h2 className="text-2xl font-bold text-green-600 mb-4">
+                                    Congratulations!
+                                </h2>
+                                <p className="mb-4">
+                                    You completed the game in {moves} moves and{" "}
+                                    {90 - time} seconds.
+                                </p>
+                                <img
+                                    src={win}
+                                    alt="Win gif"
+                                    className="mx-auto w-32 h-32"
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <h2 className="text-2xl font-bold text-red-600 mb-4">
+                                    Time is up!
+                                </h2>
+                                <p className="mb-4">
+                                    Better luck next time!
+                                </p>
+                                <img
+                                    src={loose}
+                                    alt="Lose gif"
+                                    className="mx-auto w-32 h-32"
+                                />
+                            </>
+                        )}
+                        <div className="flex justify-around mt-4">
+                            <button
+                                className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition"
+                                onClick={initializeGame}
+                            >
+                                Restart
+                            </button>
+                            <button
+                                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
+                                onClick={() => navigate("/home")}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
-
-export default MeomoryFlipGame
+export default MemoryFlipGame;

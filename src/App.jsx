@@ -101,6 +101,8 @@ import AddGroup from "./components/AddGroup";
 import AddUsers from "./components/AddUsers";
 import SpinMathMedium from "./components/SpinWithMathsCom/SpinMathMedium";
 import SpinWithMath from "./components/SpinWithMath";
+import DictionaryWords from "./components/DictionaryWords";
+import AboutUsPage from "./components/AboutUsPage";
 
 const App = () => {
   return (
@@ -127,7 +129,9 @@ const App = () => {
                 </Route>
                 <Route path="/game-rules" element={<GameRules />} />
                 <Route path="/spin" element={<SpinWithMath/>}/>
+                <Route path="/about-game" element={<AboutUsPage/>} />
                 <Route path="games-landing" element={<BrushedResults />} />
+                <Route path="/dictionary" element={<DictionaryWords/>} />
                 {/* <Route path="/games" element={<Games/>} /> */}
                 <Route path="/games" element={<Games />}>
                   <Route index element={<Navigate to="displaygames" />} />

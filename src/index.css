@@ -125,3 +125,40 @@
 .zoom-animation {
   animation: zoomInOut 0.5s ease-in-out;
 }
+
+
+@keyframes zoomInOuts {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.zoom-animations {
+  animation: zoomInOuts 1s infinite;
+}
+
+
+.gradient-color {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  min-height: 100vh; /* Ensure the gradient covers the full viewport */
+  display: flex; /* Aligns with your JSX flex container */
+  flex-direction: column; /* Matches JSX flex setup */
+ /* Matches JSX flex setup */
+}
+
+@keyframes gradient {
+  0% {
+      background-position: 0% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100% {
+      background-position: 0% 50%;
+  }
+}

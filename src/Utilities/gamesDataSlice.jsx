@@ -289,20 +289,20 @@ const initialGamesState = {
       video: "https://example.com/videos/spot-differences.mp4",
       rules: "Spot all the differences between two pictures!",
     },
+    // {
+    //   id: 25,
+    //   played: false,
+    //   notplayed: true,
+    //   status: "locked",
+    //   level: "all",
+    //   name: "Shadow Game",
+    //   link: "/games/shadow-game",
+    //   img: "https://w7.pngwing.com/pngs/88/625/png-transparent-rabbit-silhouette-black-isolated-form-animal-shadow-thumbnail.png",
+    //   video: "https://example.com/videos/shadow-game.mp4",
+    //   rules: "Match the objects with their shadows before time runs out!",
+    // },
     {
       id: 25,
-      played: false,
-      notplayed: true,
-      status: "locked",
-      level: "all",
-      name: "Shadow Game",
-      link: "/games/shadow-game",
-      img: "https://w7.pngwing.com/pngs/88/625/png-transparent-rabbit-silhouette-black-isolated-form-animal-shadow-thumbnail.png",
-      video: "https://example.com/videos/shadow-game.mp4",
-      rules: "Match the objects with their shadows before time runs out!",
-    },
-    {
-      id: 26,
       played: false,
       notplayed: true,
       status: "locked",
@@ -313,20 +313,20 @@ const initialGamesState = {
       video: "https://example.com/videos/finding-word.mp4",
       rules: "Find all the hidden words to solve the puzzle and score points!",
     },
+    // {
+    //   id: 27,
+    //   played: false,
+    //   notplayed: true,
+    //   status: "locked",
+    //   level: "all",
+    //   name: "Guess Number",
+    //   link: "/games/tooth-defender",
+    //   img: "https://w7.pngwing.com/pngs/19/677/png-transparent-guess-the-number-game-android-bengali-android-game-text-logo-thumbnail.png",
+    //   video: "https://example.com/videos/guess-number.mp4",
+    //   rules: "Guess the number chosen by the computer in the least attempts!",
+    // },
     {
-      id: 27,
-      played: false,
-      notplayed: true,
-      status: "locked",
-      level: "all",
-      name: "Guess Number",
-      link: "/games/tooth-defender",
-      img: "https://w7.pngwing.com/pngs/19/677/png-transparent-guess-the-number-game-android-bengali-android-game-text-logo-thumbnail.png",
-      video: "https://example.com/videos/guess-number.mp4",
-      rules: "Guess the number chosen by the computer in the least attempts!",
-    },
-    {
-      id: 28,
+      id: 26,
       played: false,
       notplayed: true,
       status: "locked",
@@ -338,7 +338,7 @@ const initialGamesState = {
       rules: "Answer math questions quickly to earn points!",
     },
     {
-      id: 29,
+      id: 27,
       played: false,
       notplayed: true,
       status: "locked",
@@ -350,7 +350,7 @@ const initialGamesState = {
       rules: "Answer math questions quickly to earn points!",
     },
     {
-      id: 30,
+      id: 28,
       played: false,
       notplayed: true,
       status: "locked",
@@ -362,7 +362,7 @@ const initialGamesState = {
       rules: "Answer math questions quickly to earn points!",
     },
     {
-      id: 31,
+      id: 29,
       played: false,
       notplayed: true,
       status: "locked",
@@ -374,7 +374,7 @@ const initialGamesState = {
       rules: "Fill in the missing number to complete the sequence!",
     },
     {
-      id: 32,
+      id: 30,
       played: false,
       notplayed: true,
       status: "locked",
@@ -386,7 +386,7 @@ const initialGamesState = {
       rules: "Find the object that doesn't belong in the group!",
     },
     {
-      id: 33,
+      id: 31,
       played: false,
       notplayed: true,
       level: "medium",
@@ -398,7 +398,7 @@ const initialGamesState = {
       rules: "Find the object that doesn't belong in the group!",
     },
     {
-      id: 34,
+      id: 32,
       played: false,
       notplayed: true,
       level: "medium",
@@ -410,7 +410,7 @@ const initialGamesState = {
       rules: "Find the object that doesn't belong in the group!",
     },
     {
-      id: 35,
+      id: 33,
       played: false,
       notplayed: true,
       status: "locked",
@@ -422,7 +422,7 @@ const initialGamesState = {
       rules: "Find the object that doesn't belong in the group!",
     },
     {
-      id: 36,
+      id: 34,
       played: false,
       notplayed: true,
       status: "locked",
@@ -434,7 +434,7 @@ const initialGamesState = {
       rules: "Find the object that doesn't belong in the group!",
     },
     {
-      id: 37,
+      id: 35,
       played: false,
       notplayed: true,
       status: "locked",
@@ -446,7 +446,7 @@ const initialGamesState = {
       rules: "Find the object that doesn't belong in the group!",
     },
     {
-      id: 38,
+      id: 36,
       played: false,
       notplayed: true,
       status: "locked",
@@ -458,19 +458,19 @@ const initialGamesState = {
       rules: "Find the object that doesn't belong in the group!",
     },
     {
-      id: 39,
+      id: 37,
       played: false,
       notplayed: true,
       level: "hard",
       status: "locked",
-      name: "Odd One Out-wheather",
-      link: "/games/odd-one-out",
+      name: "Odd One Out",
+      link: "/games/odd-one-out-wheather",
       img: "https://w7.pngwing.com/pngs/760/237/png-transparent-weather-and-climate-weather-and-climate-weather-radar-weather-station-weather-leaf-logo-weather-forecasting-thumbnail.png",
       video: "https://example.com/videos/odd-one-out.mp4",
       rules: "Find the object that doesn't belong in the group!",
     },
     {
-      id: 40,
+      id: 38,
       played: false,
       notplayed: true,
       status: "locked",
@@ -482,7 +482,7 @@ const initialGamesState = {
       rules: "Find the object that doesn't belong in the group!",
     },
     {
-      id: 41,
+      id: 39,
       played: false,
       notplayed: true,
       status: "locked",
@@ -494,7 +494,7 @@ const initialGamesState = {
       rules: "Rearrange the pieces to form the correct sequence or image!",
     },
     {
-      id: 42,
+      id: 40,
       played: false,
       notplayed: true,
       level: "easy",
@@ -506,7 +506,7 @@ const initialGamesState = {
       rules: "Rearrange the pieces to form the correct sequence or image!",
     },
     {
-      id: 43,
+      id: 41,
       played: false,
       notplayed: true,
       level: "easy",
@@ -518,7 +518,7 @@ const initialGamesState = {
       rules: "Rearrange the pieces to form the correct sequence or image!",
     },
     {
-      id: 44,
+      id: 42,
       played: false,
       notplayed: true,
       level: "medium",
@@ -530,7 +530,7 @@ const initialGamesState = {
       rules: "Rearrange the pieces to form the correct sequence or image!",
     },
     {
-      id: 45,
+      id: 43,
       played: false,
       notplayed: true,
       level: "medium",
@@ -542,7 +542,7 @@ const initialGamesState = {
       rules: "Rearrange the pieces to form the correct sequence or image!",
     },
     {
-      id: 46,
+      id: 44,
       played: false,
       notplayed: true,
       status: "locked",
@@ -554,7 +554,7 @@ const initialGamesState = {
       rules: "Rearrange the pieces to form the correct sequence or image!",
     },
     {
-      id: 47,
+      id: 45,
       played: false,
       notplayed: true,
       level: "hard",
@@ -566,7 +566,7 @@ const initialGamesState = {
       rules: "Rearrange the pieces to form the correct sequence or image!",
     },
     {
-      id: 48,
+      id: 46,
       played: false,
       notplayed: true,
       status: "locked",
@@ -578,7 +578,7 @@ const initialGamesState = {
       rules: "Rearrange the pieces to form the correct sequence or image!",
     },
     {
-      id: 49,
+      id: 48,
       played: false,
       level: "hard",
       notplayed: true,
@@ -590,7 +590,7 @@ const initialGamesState = {
       rules: "Rearrange the pieces to form the correct sequence or image!",
     },
     {
-      id: 50,
+      id: 49,
       played: false,
       notplayed: true,
       level: "easy",
@@ -602,7 +602,7 @@ const initialGamesState = {
       rules: "Search and find all the hidden objects in the scene!",
     },
     {
-      id: 51,
+      id: 50,
       played: false,
       notplayed: true,
       level: "easy",
@@ -614,7 +614,7 @@ const initialGamesState = {
       rules: "Search and find all the hidden objects in the scene!",
     },
     {
-      id: 52,
+      id: 51,
       played: false,
       notplayed: true,
       level: "easy",
@@ -626,7 +626,7 @@ const initialGamesState = {
       rules: "Search and find all the hidden objects in the scene!",
     },
     {
-      id: 53,
+      id: 52,
       played: false,
       level: "medium",
       notplayed: true,
@@ -638,7 +638,7 @@ const initialGamesState = {
       rules: "Search and find all the hidden objects in the scene!",
     },
     {
-      id: 54,
+      id: 53,
       played: false,
       level: "medium",
       notplayed: true,
@@ -650,7 +650,7 @@ const initialGamesState = {
       rules: "Search and find all the hidden objects in the scene!",
     },
     {
-      id: 55,
+      id: 54,
       played: false,
       notplayed: true,
       status: "locked",
@@ -662,7 +662,7 @@ const initialGamesState = {
       rules: "Search and find all the hidden objects in the scene!",
     },
     {
-      id: 56,
+      id: 55,
       played: false,
       notplayed: true,
       level: "hard",
@@ -674,7 +674,7 @@ const initialGamesState = {
       rules: "Search and find all the hidden objects in the scene!",
     },
     {
-      id: 57,
+      id: 56,
       played: false,
       level: "hard",
       notplayed: true,
@@ -686,7 +686,7 @@ const initialGamesState = {
       rules: "Search and find all the hidden objects in the scene!",
     },
     {
-      id: 58,
+      id: 57,
       played: false,
       notplayed: true,
       level: "hard",
@@ -698,7 +698,7 @@ const initialGamesState = {
       rules: "Search and find all the hidden objects in the scene!",
     },
     {
-      id: 59,
+      id: 58,
       played: false,
       notplayed: true,
       level: "easy",
@@ -710,7 +710,7 @@ const initialGamesState = {
       rules: "Guess the missing letters to complete the word!",
     },
     {
-      id: 60,
+      id: 59,
       played: false,
       level: "easy",
       notplayed: true,
@@ -722,7 +722,7 @@ const initialGamesState = {
       rules: "Guess the missing letters to complete the word!",
     },
     {
-      id: 61,
+      id: 60,
       played: false,
       notplayed: true,
       level: "easy",
@@ -734,7 +734,7 @@ const initialGamesState = {
       rules: "Guess the missing letters to complete the word!",
     },
     {
-      id: 62,
+      id: 61,
       played: false,
       notplayed: true,
       level: "medium",
@@ -746,7 +746,7 @@ const initialGamesState = {
       rules: "Guess the missing letters to complete the word!",
     },
     {
-      id: 63,
+      id: 62,
       played: false,
       level: "medium",
       notplayed: true,
@@ -758,7 +758,7 @@ const initialGamesState = {
       rules: "Guess the missing letters to complete the word!",
     },
     {
-      id: 64,
+      id: 63,
       played: false,
       level: "medium",
       notplayed: true,
@@ -770,7 +770,7 @@ const initialGamesState = {
       rules: "Guess the missing letters to complete the word!",
     },
     {
-      id: 65,
+      id: 64,
       played: false,
       level: "hard",
       notplayed: true,
@@ -782,7 +782,7 @@ const initialGamesState = {
       rules: "Guess the missing letters to complete the word!",
     },
     {
-      id: 66,
+      id: 65,
       played: false,
       level: "hard",
       notplayed: true,
@@ -794,7 +794,7 @@ const initialGamesState = {
       rules: "Guess the missing letters to complete the word!",
     },
     {
-      id: 67,
+      id: 66,
       played: false,
       notplayed: true,
       level: "hard",
@@ -806,7 +806,7 @@ const initialGamesState = {
       rules: "Guess the missing letters to complete the word!",
     },
     {
-      id: 68,
+      id: 67,
       played: false,
       notplayed: true,
       level: "easy",
@@ -818,7 +818,7 @@ const initialGamesState = {
       rules: "Identify and complete the number patterns in the grid!",
     },
     {
-      id: 69,
+      id: 68,
       played: false,
       notplayed: true,
       status: "locked",
@@ -830,7 +830,7 @@ const initialGamesState = {
       rules: "Identify and complete the number patterns in the grid!",
     },
     {
-      id: 70,
+      id: 69,
       played: false,
       notplayed: true,
       status: "locked",
@@ -842,7 +842,7 @@ const initialGamesState = {
       rules: "Identify and complete the number patterns in the grid!",
     },
     {
-      id: 71,
+      id: 70,
       played: false,
       notplayed: true,
       status: "locked",
@@ -854,7 +854,7 @@ const initialGamesState = {
       rules: "Perform actions related to the moon phases and earn points!",
     },
     {
-      id: 72,
+      id: 71,
       played: false,
       notplayed: true,
       level: "all",
@@ -878,7 +878,7 @@ const initialGamesState = {
     //   rules: "Solve equations using BODMAS rules to score points!",
     // },
     {
-      id: 73,
+      id: 72,
       played: false,
       notplayed: true,
       status: "locked",
@@ -890,7 +890,7 @@ const initialGamesState = {
       rules: "Tap quickly on the targets to earn points before time runs out!",
     },
     {
-      id: 74,
+      id: 73,
       played: false,
       notplayed: true,
       status: "locked",
@@ -902,7 +902,7 @@ const initialGamesState = {
       rules: "Unveil the hidden image piece by piece before time runs out!",
     },
     {
-      id: 75,
+      id: 74,
       played: false,
       notplayed: true,
       status: "locked",
@@ -914,7 +914,7 @@ const initialGamesState = {
       rules: "Spin the wheel and complete challenges to win rewards!",
     },
     {
-      id: 76,
+      id: 75,
       played: false,
       notplayed: true,
       status: "locked",
@@ -926,7 +926,7 @@ const initialGamesState = {
       rules: "Spin the wheel to get math questions and solve them to score points!",
     },
     {
-      id: 77,
+      id: 76,
       played: false,
       notplayed: true,
       level: "easy",
@@ -938,7 +938,7 @@ const initialGamesState = {
       rules: "Spin the wheel to get math questions and solve them to score points!",
     },
     {
-      id: 78,
+      id: 77,
       played: false,
       notplayed: true,
       status: "locked",
